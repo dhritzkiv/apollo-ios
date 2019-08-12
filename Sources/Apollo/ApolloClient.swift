@@ -65,8 +65,8 @@ public class ApolloClient {
   /// Be aware: In more complex setups, the same underlying cache can be used across multiple instances, so if you call this on one instance, it'll clear that cache across all instances which share that cache.
   ///
   /// - Returns: Promise which fulfills when clear is complete.
-  public func clearCache() -> Promise<Void> {
-    return store.clearCache()
+  func clearCache(callbackQueue: DispatchQueue = .main, completion: (() -> Void)? = nil) {
+    self.store.clearCache(completion: completion)
   }
   
   /// Fetches a query from the server or from the local cache, depending on the current contents of the cache and the specified cache policy.
